@@ -1,0 +1,53 @@
+{
+  "kind": "collectionType",
+  "collectionName": "course_registration_forms",
+  "info": {
+    "singularName": "course-registration-form",
+    "pluralName": "course-registration-forms",
+    "displayName": "Course Registration Form"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "fullName": {
+      "type": "string"
+    },
+    "dob": {
+      "type": "date"
+    },
+    "job": {
+      "type": "enumeration",
+      "enum": [
+        "Student",
+        "Undergraduate",
+        "Worker"
+      ]
+    },
+    "company": {
+      "type": "string"
+    },
+    "selfAssessment": {
+      "type": "enumeration",
+      "enum": [
+        "Novice",
+        "Intermediate",
+        "Advanced",
+        "Expert"
+      ]
+    },
+    "hoping": {
+      "type": "text"
+    },
+    "openningDate": {
+      "type": "datetime"
+    },
+    "closingDate": {
+      "type": "datetime"
+    }
+  }
+}
