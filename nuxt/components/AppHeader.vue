@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <div class="fixed drawer z-50">
+    <div class="fixed drawer z-50 bg-gray-950 opacity-80">
         <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
         <div class="drawer-content flex flex-col">
             <!-- Navbar -->
@@ -35,7 +35,7 @@
             <label for="my-drawer-3" aria-label="close sidebar" class="drawer-overlay"></label>
             <ul class="menu p-4 w-80 min-h-full bg-gray-950">
                 <!-- Sidebar content here -->
-                <img src="/logo-white.svg" alt="Logo" class="h-10 w-auto m-4" />
+                <nuxt-link to="/" class="btn btn-ghost"> <img src="/logo-white.svg" alt="Logo" class="h-10 w-auto" /></nuxt-link>
                 <nuxt-link to="/announcement" class="btn btn-ghost"><i
                         class="fa-solid fa-bullhorn"></i>Announcement</nuxt-link>
                 <nuxt-link to="/course" class="btn btn-ghost"><i class="fa-solid fa-book"></i>Course</nuxt-link>

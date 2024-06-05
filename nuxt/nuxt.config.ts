@@ -1,8 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+
 export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ['~/assets/tailwind.css'],
-
   postcss: {
     plugins: {
       tailwindcss: {},
@@ -10,5 +10,13 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: ["@nuxt/eslint", "@nuxtjs/tailwindcss"]
+  modules: ["@nuxtjs/apollo", "@nuxt/eslint", "@nuxtjs/tailwindcss"],
+
+  apollo: {
+    clients: {
+      default: {
+        httpEndpoint: `${process.env.API_URL || "http://localhost:1337"}/graphql`,
+      },
+    },
+  },
 })

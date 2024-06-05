@@ -3,8 +3,8 @@
 @tailwind components;
 @tailwind utilities;
 
-.responsive-spacer {
-    @apply p-4 sm:px-8 md:px-16
+.pages-wrapper {
+    @apply p-4 pt-20 md:px-8 md:pt-28 xl:px-12 xl:pt-32 min-h-screen;
 }
 
 .wrapper {
