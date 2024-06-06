@@ -20,6 +20,9 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "5.3.4",
+    "strapi-plugin-excel-export-2024": "^1.0.7",
+    "strapi-plugin-ezforms": "^0.1.7",
+    "strapi-plugin-graphs-builder": "^1.0.0",
     "styled-components": "5.3.3"
   },
   "author": {
