@@ -1,6 +1,6 @@
 const strapiBaseUri = process.env.API_URL || "http://localhost:1337";
 
-export function getStrapiMedia(url) {
+export function getStrapiMedia(url: string) {
     // Check if URL is a local path
     if (url.startsWith("/")) {
       return `${strapiBaseUri}${url}`;
@@ -8,7 +8,7 @@ export function getStrapiMedia(url) {
     return url;
   }
 
-export function formatDate(date) {
+export function formatDate(date: string | number | Date) {
     return new Date(date).toLocaleDateString("en-UK", {
       day: "numeric",
       month: "short",
