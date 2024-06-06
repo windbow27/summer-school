@@ -4,7 +4,8 @@
   "info": {
     "singularName": "lesson",
     "pluralName": "lessons",
-    "displayName": "Lesson"
+    "displayName": "Lesson",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -20,15 +21,13 @@
     "timestamp": {
       "type": "datetime"
     },
-    "media": {
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ],
+    "image": {
       "type": "media",
-      "multiple": true
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
     }
   }
 }

@@ -1,4 +1,4 @@
-interface Announcement {
+interface Lesson {
     id: string;
     attributes: {
       title: string;
@@ -15,8 +15,8 @@ interface Announcement {
     };
   }
   
-  interface AnnouncementsData {
-    announcements: {
-      data: Announcement[];
+  interface LessonsData {
+   lessons: {
+      data: Lesson[];
     };
   }

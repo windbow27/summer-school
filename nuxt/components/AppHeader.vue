@@ -1,5 +1,14 @@
 <script setup lang="ts">
+const { logout } = useStrapiAuth()
+const router = useRouter()
 
+const user = useStrapiUser()
+
+const onClick = () => {
+    logout()
+
+    router.push('/')
+}
 </script>
 
 <template>
@@ -17,16 +26,18 @@
                         </svg>
                     </label>
                 </div>
-                <nuxt-link to="/" class="btn btn-ghost"> <img src="/logo-white.svg" alt="Logo" class="h-10 w-auto" /></nuxt-link>
+                <nuxt-link to="/" class="btn btn-ghost"> <img src="/logo-white.svg" alt="Logo"
+                        class="h-10 w-auto" /></nuxt-link>
                 <div class="flex-none hidden lg:block ml-auto">
                     <ul class="menu menu-horizontal">
                         <!-- Navbar menu content here -->
                         <nuxt-link to="/announcement" class="btn btn-ghost"><i
                                 class="fa-solid fa-bullhorn"></i>Announcement</nuxt-link>
-                        <nuxt-link to="/course" class="btn btn-ghost"><i
-                                class="fa-solid fa-book"></i>Course</nuxt-link>
-                        <nuxt-link to="/signup" class="btn btn-ghost"><i class="fa-solid fa-user-plus"></i>Sign
-                            Up</nuxt-link>
+                        <nuxt-link to="/lesson" class="btn btn-ghost"><i class="fa-solid fa-book"></i>Lesson</nuxt-link>
+                        <nuxt-link v-if="!user" to="/login" class="btn btn-ghost"><i
+                                class="fa-solid fa-user"></i>Login</nuxt-link>
+                        <a v-else @click="onClick" class="btn btn-ghost cursor-pointer"><i
+                                class="fa-solid fa-sign-out"></i>Logout</a>
                     </ul>
                 </div>
             </div>
@@ -35,11 +46,13 @@
             <label for="my-drawer-3" aria-label="close sidebar" class="drawer-overlay"></label>
             <ul class="menu p-4 w-80 min-h-full bg-gray-950">
                 <!-- Sidebar content here -->
-                <nuxt-link to="/" class="btn btn-ghost"> <img src="/logo-white.svg" alt="Logo" class="h-10 w-auto" /></nuxt-link>
                 <nuxt-link to="/announcement" class="btn btn-ghost"><i
                         class="fa-solid fa-bullhorn"></i>Announcement</nuxt-link>
-                <nuxt-link to="/course" class="btn btn-ghost"><i class="fa-solid fa-book"></i>Course</nuxt-link>
-                <nuxt-link to="/signup" class="btn btn-ghost"><i class="fa-solid fa-user-plus"></i>Sign Up</nuxt-link>
+                <nuxt-link to="/lesson" class="btn btn-ghost"><i class="fa-solid fa-book"></i>Lesson</nuxt-link>
+                <nuxt-link v-if="!user" to="/login" class="btn btn-ghost"><i
+                        class="fa-solid fa-user"></i>Login</nuxt-link>
+                <a v-else @click="onClick" class="btn btn-ghost cursor-pointer"><i
+                        class="fa-solid fa-sign-out"></i>Logout</a>
             </ul>
         </div>
     </div>
