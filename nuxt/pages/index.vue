@@ -11,7 +11,7 @@
         <h1 class="mb-5 text-5xl font-bold">Hello there</h1>
         <p class="mb-5">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
           quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-          <router-link to="/signup" class="btn btn-primary">Get Started</router-link>
+          <router-link to="/" class="btn btn-primary">Get Started</router-link>
       </div>
     </div>
   </div>

@@ -32,8 +32,8 @@ const onClick = () => {
                     <ul class="menu menu-horizontal">
                         <!-- Navbar menu content here -->
                         <nuxt-link to="/announcement" class="btn btn-ghost"><i
-                                class="fa-solid fa-bullhorn"></i>Announcement</nuxt-link>
-                        <nuxt-link to="/lesson" class="btn btn-ghost"><i class="fa-solid fa-book"></i>Lesson</nuxt-link>
+                                class="fa-solid fa-bullhorn"></i>Announcements</nuxt-link>
+                        <nuxt-link to="/lesson" class="btn btn-ghost"><i class="fa-solid fa-book"></i>Lessons</nuxt-link>
                         <nuxt-link v-if="!user" to="/login" class="btn btn-ghost"><i
                                 class="fa-solid fa-user"></i>Login</nuxt-link>
                         <a v-else @click="onClick" class="btn btn-ghost cursor-pointer"><i
@@ -47,8 +47,8 @@ const onClick = () => {
             <ul class="menu p-4 w-80 min-h-full bg-gray-950">
                 <!-- Sidebar content here -->
                 <nuxt-link to="/announcement" class="btn btn-ghost"><i
-                        class="fa-solid fa-bullhorn"></i>Announcement</nuxt-link>
-                <nuxt-link to="/lesson" class="btn btn-ghost"><i class="fa-solid fa-book"></i>Lesson</nuxt-link>
+                        class="fa-solid fa-bullhorn"></i>Announcements</nuxt-link>
+                <nuxt-link to="/lesson" class="btn btn-ghost"><i class="fa-solid fa-book"></i>Lessons</nuxt-link>
                 <nuxt-link v-if="!user" to="/login" class="btn btn-ghost"><i
                         class="fa-solid fa-user"></i>Login</nuxt-link>
                 <a v-else @click="onClick" class="btn btn-ghost cursor-pointer"><i

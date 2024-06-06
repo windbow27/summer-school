@@ -2,13 +2,17 @@
     <div class="hero pages-wrapper"
         style="background-image: url(https://preview.redd.it/y1jqr8m0fv531.jpg?width=2580&format=pjpg&auto=webp&s=2f377181d98a5629682394e29c687679a49bfef1);">
         <div class="hero-content flex-col lg:flex-row">
+            <!--side panel-->
             <div class="text-center w-full max-w-xl lg:text-left">
                 <h1 class="text-5xl font-bold">Login now!</h1>
                 <p class="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi
                     exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
             </div>
+
+            <!--login form-->
             <div class="card shrink-0 w-full max-w-lg shadow-2xl bg-gray-950">
                 <form class="card-body" @submit.prevent="onSubmit">
+                    <!--email-->
                     <div class="form-control">
                         <label class="label">
                             <span class="label-text">Email</span>
@@ -16,6 +20,7 @@
                         <input v-model="identifier" type="email" placeholder="email" class="input input-bordered"
                             required />
                     </div>
+                    <!--password-->
                     <div class="form-control">
                         <label class="label">
                             <span class="label-text">Password</span>
@@ -23,12 +28,16 @@
                         <input v-model="password" type="password" placeholder="password" class="input input-bordered"
                             required />
                         <label class="label">
-                            <a href="#" class="label-text-alt link link-hover">Don't have an account? Register</a>
+                            <nuxt-link to="/register" class="label-text-alt link link-hover">
+                                Don't have an account? Register.
+                            </nuxt-link>
                         </label>
                     </div>
+                    <!--login button-->
                     <div class="form-control mt-6">
                         <button class="btn btn-primary">Login</button>
                     </div>
+                    <!--error message-->
                     <p class="text-error" :class="{ 'invisible': !showWrongCredentialsError }">
                         Please check your password and account name, then try again.
                     </p>
