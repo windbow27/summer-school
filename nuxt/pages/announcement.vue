@@ -6,7 +6,7 @@
     <div v-else>
       <div v-for="announcement in data.announcements.data" :key="announcement.id" class="card max-w-96 bg-gray-950 shadow-xl">
         <figure>
-          <img :src="getStrapiMedia(announcement.attributes.media.data.attributes.url)" :alt="announcement.attributes.media.data.attributes.alternativeText" />
+          <img :src="getStrapiMedia(announcement.attributes.image.data.attributes.url)" :alt="announcement.attributes.image.data.attributes.alternativeText" />
         </figure>
         <div class="card-body">
           <h2 class="card-title">{{ announcement.attributes.title }}</h2>
@@ -32,7 +32,7 @@ const query = gql`
           title
           content
           publishedAt
-          media {
+          image {
             data {
               attributes {
                 url

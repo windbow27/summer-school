@@ -10,7 +10,11 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: ["@nuxtjs/apollo", "@nuxt/eslint", "@nuxtjs/tailwindcss"],
+  modules: [
+    "@nuxtjs/apollo", 
+    "@nuxt/eslint", 
+    "@nuxtjs/tailwindcss", 
+    "@nuxtjs/strapi"],
 
   apollo: {
     clients: {
@@ -19,4 +23,13 @@ export default defineNuxtConfig({
       },
     },
   },
+
+  strapi: {
+    cookie: {
+      path: '/',
+      maxAge: 14 * 24 * 60 * 60,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: true
+    }
+  }
 })

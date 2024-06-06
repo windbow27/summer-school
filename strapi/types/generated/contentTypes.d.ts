@@ -803,7 +803,7 @@ export interface ApiAnnouncementAnnouncement extends Schema.CollectionType {
     title: Attribute.String;
     content: Attribute.Text;
     timestamp: Attribute.DateTime;
-    media: Attribute.Media<'images'> & Attribute.Required;
+    image: Attribute.Media<'images'> & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -869,6 +869,7 @@ export interface ApiLessonLesson extends Schema.CollectionType {
     singularName: 'lesson';
     pluralName: 'lessons';
     displayName: 'Lesson';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -877,7 +878,7 @@ export interface ApiLessonLesson extends Schema.CollectionType {
     title: Attribute.String;
     content: Attribute.Text;
     timestamp: Attribute.DateTime;
-    media: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
+    image: Attribute.Media<'images'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

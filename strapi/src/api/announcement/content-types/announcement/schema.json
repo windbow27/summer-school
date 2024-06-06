@@ -21,7 +21,7 @@
     "timestamp": {
       "type": "datetime"
     },
-    "media": {
+    "image": {
       "type": "media",
       "multiple": false,
       "required": true,
