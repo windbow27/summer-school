@@ -19,4 +19,9 @@ export default defineNuxtConfig({
       },
     },
   },
+
+  // http: {
+  //   baseURL: `${process.env.API_URL || "http://localhost:1337"}/api`,
+  //   browserBaseURL: `${process.env.API_URL || "http://localhost:1337"}/api`,
+  // },
 })
