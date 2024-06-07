@@ -828,7 +828,7 @@ export interface ApiCourseRegistrationFormCourseRegistrationForm
   info: {
     singularName: 'course-registration-form';
     pluralName: 'course-registration-forms';
-    displayName: 'Course Registration Form';
+    displayName: 'Course Registration';
     description: '';
   };
   options: {
@@ -837,12 +837,10 @@ export interface ApiCourseRegistrationFormCourseRegistrationForm
   attributes: {
     fullName: Attribute.String;
     dob: Attribute.Date;
-    job: Attribute.Enumeration<['Student', 'Undergraduate', 'Worker']>;
+    job: Attribute.String;
     company: Attribute.String;
-    selfAssessment: Attribute.Enumeration<
-      ['Novice', 'Intermediate', 'Advanced', 'Expert']
-    >;
-    hoping: Attribute.Text;
+    knowledge: Attribute.String;
+    goal: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

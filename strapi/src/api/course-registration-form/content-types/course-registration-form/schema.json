@@ -4,7 +4,7 @@
   "info": {
     "singularName": "course-registration-form",
     "pluralName": "course-registration-forms",
-    "displayName": "Course Registration Form",
+    "displayName": "Course Registration",
     "description": ""
   },
   "options": {
@@ -19,27 +19,16 @@
       "type": "date"
     },
     "job": {
-      "type": "enumeration",
-      "enum": [
-        "Student",
-        "Undergraduate",
-        "Worker"
-      ]
+      "type": "string"
     },
     "company": {
       "type": "string"
     },
-    "selfAssessment": {
-      "type": "enumeration",
-      "enum": [
-        "Novice",
-        "Intermediate",
-        "Advanced",
-        "Expert"
-      ]
+    "knowledge": {
+      "type": "string"
     },
-    "hoping": {
-      "type": "text"
+    "goal": {
+      "type": "string"
     }
   }
 }
