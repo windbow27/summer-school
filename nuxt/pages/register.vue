@@ -56,7 +56,22 @@ const password = ref('')
 
 const onSubmit = async () => {
     try {
-        await register({ username: username.value, email: email.value, password: password.value })
+        await register({ 
+            username: username.value, 
+            email: email.value, 
+            password: password.value, 
+            phoneNumber: '' 
+        })   
+        const response = await fetch('http://localhost:1337/api/email', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: email.value,
+                username: username.value,
+            }),
+        });
 
         router.push('/login')
     } catch (e) { 

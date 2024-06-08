@@ -788,6 +788,50 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface PluginGraphsBuilderGraph extends Schema.CollectionType {
+  collectionName: 'graphs_builder_graph';
+  info: {
+    name: 'graph';
+    description: '';
+    singularName: 'graph';
+    pluralName: 'graphs';
+    displayName: 'Graph';
+  };
+  options: {
+    draftAndPublish: false;
+    timestamps: true;
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: true;
+    };
+    'content-type-builder': {
+      visible: true;
+    };
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    type: Attribute.Enumeration<['pie', 'bar', 'line', 'dateLine']> &
+      Attribute.Required;
+    collectionX: Attribute.String & Attribute.Required;
+    collectionXAttribute: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::graphs-builder.graph',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::graphs-builder.graph',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiAnnouncementAnnouncement extends Schema.CollectionType {
   collectionName: 'announcements';
   info: {
@@ -859,6 +903,37 @@ export interface ApiCourseRegistrationFormCourseRegistrationForm
   };
 }
 
+export interface ApiEmailEmail extends Schema.CollectionType {
+  collectionName: 'emails';
+  info: {
+    singularName: 'email';
+    pluralName: 'emails';
+    displayName: 'Email';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    email: Attribute.String;
+    username: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::email.email',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::email.email',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiLessonLesson extends Schema.CollectionType {
   collectionName: 'lessons';
   info: {
@@ -911,8 +986,12 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'plugin::ezforms.submission': PluginEzformsSubmission;
+      'plugin::ezforms.recipient': PluginEzformsRecipient;
+      'plugin::graphs-builder.graph': PluginGraphsBuilderGraph;
       'api::announcement.announcement': ApiAnnouncementAnnouncement;
       'api::course-registration-form.course-registration-form': ApiCourseRegistrationFormCourseRegistrationForm;
+      'api::email.email': ApiEmailEmail;
       'api::lesson.lesson': ApiLessonLesson;
     }
   }
