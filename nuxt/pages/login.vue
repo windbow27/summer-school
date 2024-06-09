@@ -58,7 +58,7 @@ const showWrongCredentialsError = ref(false);
 const onSubmit = async () => {
     try {
         await login({ identifier: identifier.value, password: password.value });
-        router.push('/lesson');
+        router.push('/lessons');
     } catch (e) {
         console.error('An error occurred:', e);
         showWrongCredentialsError.value = true;
