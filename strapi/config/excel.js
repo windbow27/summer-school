@@ -9,5 +9,17 @@ module.exports = {
             relation: {},
             locale: "false",
         },
+        "api::course-registration-form.course-registration-form": {
+            columns: [
+                "fullName",
+                "dob",
+                "job",
+                "company",
+                "knowledge",
+                "goal"
+            ],
+            relation: {},
+            locale: "false",
+        },
     },
   };

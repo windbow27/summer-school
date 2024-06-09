@@ -9,6 +9,14 @@ module.exports = {
           "config": {
             "policies": []
           }
+        },
+        {
+          "method": "POST",
+          "path": "/verification-email",
+          "handler": "email.sendVerificationEmail",
+          "config": {
+            "policies": []
+          }
         }
     ]
 };

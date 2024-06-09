@@ -48,17 +48,31 @@
 </template>
 
 <script setup lang="ts">
-const { login } = useStrapiAuth();
+import { getVerificationCode } from '~/utils/utils';
+import { useStorage } from '@vueuse/core';
 const router = useRouter();
-
+const accountStorage = useStorage('account', { email: '', password: '' });
+const codeStorage = useStorage('code', '')
 const identifier = ref('');
 const password = ref('');
 const showWrongCredentialsError = ref(false);
 
 const onSubmit = async () => {
     try {
-        await login({ identifier: identifier.value, password: password.value });
-        router.push('/lesson');
+        const code = getVerificationCode();
+        const response = await fetch('http://localhost:1337/api/verification-email', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: identifier.value,
+                code: code,
+            }),
+        });
+        accountStorage.value = { email: identifier.value, password: password.value };
+        codeStorage.value = code;
+        router.push('/verification');
     } catch (e) {
         console.error('An error occurred:', e);
         showWrongCredentialsError.value = true;

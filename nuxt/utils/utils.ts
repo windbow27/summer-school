@@ -15,3 +15,10 @@ export function formatDate(date: string | number | Date) {
       year: "numeric",
     });
   }
+
+export function getVerificationCode() {
+  const code = Math.floor(100000 + Math.random() * 900000);
+
+  // Convert the number to a string and return it
+  return code.toString();
+}
