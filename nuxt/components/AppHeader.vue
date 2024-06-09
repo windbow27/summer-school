@@ -31,9 +31,9 @@ const onClick = () => {
                 <div class="flex-none hidden lg:block ml-auto">
                     <ul class="menu menu-horizontal">
                         <!-- Navbar menu content here -->
-                        <nuxt-link to="/announcement" class="btn btn-ghost"><i
+                        <nuxt-link to="/announcements" class="btn btn-ghost"><i
                                 class="fa-solid fa-bullhorn"></i>Announcements</nuxt-link>
-                        <nuxt-link to="/lesson" class="btn btn-ghost"><i class="fa-solid fa-book"></i>Lessons</nuxt-link>
+                        <nuxt-link to="/lessons" class="btn btn-ghost"><i class="fa-solid fa-book"></i>Lessons</nuxt-link>
                         <nuxt-link v-if="!user" to="/login" class="btn btn-ghost"><i
                                 class="fa-solid fa-user"></i>Login</nuxt-link>
                         <a v-else @click="onClick" class="btn btn-ghost cursor-pointer"><i
@@ -45,10 +45,12 @@ const onClick = () => {
         <div class="drawer-side">
             <label for="my-drawer-3" aria-label="close sidebar" class="drawer-overlay"></label>
             <ul class="menu p-4 w-80 min-h-full bg-gray-950">
+                <nuxt-link to="/" class="btn btn-ghost"> <img src="/logo-white.svg" alt="Logo"
+                    class="h-10 w-auto" /></nuxt-link>
                 <!-- Sidebar content here -->
-                <nuxt-link to="/announcement" class="btn btn-ghost"><i
+                <nuxt-link to="/announcements" class="btn btn-ghost"><i
                         class="fa-solid fa-bullhorn"></i>Announcements</nuxt-link>
-                <nuxt-link to="/lesson" class="btn btn-ghost"><i class="fa-solid fa-book"></i>Lessons</nuxt-link>
+                <nuxt-link to="/lessons" class="btn btn-ghost"><i class="fa-solid fa-book"></i>Lessons</nuxt-link>
                 <nuxt-link v-if="!user" to="/login" class="btn btn-ghost"><i
                         class="fa-solid fa-user"></i>Login</nuxt-link>
                 <a v-else @click="onClick" class="btn btn-ghost cursor-pointer"><i

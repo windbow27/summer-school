@@ -362,6 +362,142 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
+export interface ApiAnnouncementAnnouncement extends Schema.CollectionType {
+  collectionName: 'announcements';
+  info: {
+    singularName: 'announcement';
+    pluralName: 'announcements';
+    displayName: 'Announcement';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    content: Attribute.Text;
+    timestamp: Attribute.DateTime;
+    image: Attribute.Media<'images'> & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::announcement.announcement',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::announcement.announcement',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCourseRegistrationFormCourseRegistrationForm
+  extends Schema.CollectionType {
+  collectionName: 'course_registration_forms';
+  info: {
+    singularName: 'course-registration-form';
+    pluralName: 'course-registration-forms';
+    displayName: 'Course Registration';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    fullName: Attribute.String;
+    dob: Attribute.Date;
+    job: Attribute.String;
+    company: Attribute.String;
+    knowledge: Attribute.String;
+    goal: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::course-registration-form.course-registration-form',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::course-registration-form.course-registration-form',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiEmailEmail extends Schema.CollectionType {
+  collectionName: 'emails';
+  info: {
+    singularName: 'email';
+    pluralName: 'emails';
+    displayName: 'Email';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    email: Attribute.String;
+    username: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::email.email',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::email.email',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiLessonLesson extends Schema.CollectionType {
+  collectionName: 'lessons';
+  info: {
+    singularName: 'lesson';
+    pluralName: 'lessons';
+    displayName: 'Lesson';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    content: Attribute.Text;
+    timestamp: Attribute.DateTime;
+    image: Attribute.Media<'images'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::lesson.lesson',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::lesson.lesson',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -788,6 +924,125 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface PluginEzformsSubmission extends Schema.CollectionType {
+  collectionName: 'ezforms_submission';
+  info: {
+    tableName: 'submission';
+    singularName: 'submission';
+    pluralName: 'submissions';
+    displayName: 'Form Submissions';
+    description: 'A Place for all your form submissions';
+    kind: 'collectionType';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: true;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    score: Attribute.String &
+      Attribute.SetMinMax<
+        {
+          min: 1;
+          max: 50;
+        },
+        number
+      >;
+    formName: Attribute.String &
+      Attribute.SetMinMax<
+        {
+          min: 1;
+          max: 50;
+        },
+        number
+      >;
+    data: Attribute.JSON;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::ezforms.submission',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::ezforms.submission',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface PluginEzformsRecipient extends Schema.CollectionType {
+  collectionName: 'ezforms_recipient';
+  info: {
+    tableName: 'recipients';
+    singularName: 'recipient';
+    pluralName: 'recipients';
+    displayName: 'Notification Recipients';
+    description: 'List of Notification Recipients';
+    kind: 'collectionType';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: true;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    name: Attribute.String &
+      Attribute.SetMinMax<
+        {
+          min: 1;
+          max: 50;
+        },
+        number
+      >;
+    email: Attribute.String &
+      Attribute.SetMinMax<
+        {
+          min: 1;
+          max: 50;
+        },
+        number
+      >;
+    number: Attribute.String &
+      Attribute.SetMinMax<
+        {
+          min: 1;
+          max: 50;
+        },
+        number
+      >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::ezforms.recipient',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::ezforms.recipient',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginGraphsBuilderGraph extends Schema.CollectionType {
   collectionName: 'graphs_builder_graph';
   info: {
@@ -832,142 +1087,6 @@ export interface PluginGraphsBuilderGraph extends Schema.CollectionType {
   };
 }
 
-export interface ApiAnnouncementAnnouncement extends Schema.CollectionType {
-  collectionName: 'announcements';
-  info: {
-    singularName: 'announcement';
-    pluralName: 'announcements';
-    displayName: 'Announcement';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    title: Attribute.String;
-    content: Attribute.Text;
-    timestamp: Attribute.DateTime;
-    image: Attribute.Media<'images'> & Attribute.Required;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::announcement.announcement',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::announcement.announcement',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiCourseRegistrationFormCourseRegistrationForm
-  extends Schema.CollectionType {
-  collectionName: 'course_registration_forms';
-  info: {
-    singularName: 'course-registration-form';
-    pluralName: 'course-registration-forms';
-    displayName: 'Course Registration';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    fullName: Attribute.String;
-    dob: Attribute.Date;
-    job: Attribute.String;
-    company: Attribute.String;
-    knowledge: Attribute.String;
-    goal: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::course-registration-form.course-registration-form',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::course-registration-form.course-registration-form',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiEmailEmail extends Schema.CollectionType {
-  collectionName: 'emails';
-  info: {
-    singularName: 'email';
-    pluralName: 'emails';
-    displayName: 'Email';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    email: Attribute.String;
-    username: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::email.email',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::email.email',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiLessonLesson extends Schema.CollectionType {
-  collectionName: 'lessons';
-  info: {
-    singularName: 'lesson';
-    pluralName: 'lessons';
-    displayName: 'Lesson';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    title: Attribute.String;
-    content: Attribute.Text;
-    timestamp: Attribute.DateTime;
-    image: Attribute.Media<'images'>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::lesson.lesson',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::lesson.lesson',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -978,6 +1097,10 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
+      'api::announcement.announcement': ApiAnnouncementAnnouncement;
+      'api::course-registration-form.course-registration-form': ApiCourseRegistrationFormCourseRegistrationForm;
+      'api::email.email': ApiEmailEmail;
+      'api::lesson.lesson': ApiLessonLesson;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
@@ -989,10 +1112,6 @@ declare module '@strapi/types' {
       'plugin::ezforms.submission': PluginEzformsSubmission;
       'plugin::ezforms.recipient': PluginEzformsRecipient;
       'plugin::graphs-builder.graph': PluginGraphsBuilderGraph;
-      'api::announcement.announcement': ApiAnnouncementAnnouncement;
-      'api::course-registration-form.course-registration-form': ApiCourseRegistrationFormCourseRegistrationForm;
-      'api::email.email': ApiEmailEmail;
-      'api::lesson.lesson': ApiLessonLesson;
     }
   }
 }

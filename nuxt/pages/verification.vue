@@ -48,7 +48,7 @@ const onSubmit = async () => {
                 identifier: email, 
                 password: password
             })
-            router.push('/lesson')
+            router.push('/lessons')
         } else {
             console.log('Invalid code')
         }
