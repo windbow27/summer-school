@@ -50,6 +50,7 @@
 <script setup lang="ts">
 import { getVerificationCode } from '~/utils/utils';
 import { useStorage } from '@vueuse/core';
+const { login } = useStrapiAuth()
 const router = useRouter();
 const accountStorage = useStorage('account', { email: '', password: '' });
 const codeStorage = useStorage('code', '')
@@ -59,20 +60,54 @@ const showWrongCredentialsError = ref(false);
 
 const onSubmit = async () => {
     try {
-        const code = getVerificationCode();
-        const response = await fetch('http://localhost:1337/api/verification-email', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                email: identifier.value,
-                code: code,
-            }),
-        });
-        accountStorage.value = { email: identifier.value, password: password.value };
-        codeStorage.value = code;
-        router.push('/verification');
+        const query = gql`
+            query {
+                usersPermissionsUsers(filters: {email: {eq: "${identifier.value}"}}) {
+                    data {
+                        id
+                        attributes {
+                        username
+                        email
+                        enable2FA
+                        course_registration {
+                            data {
+                                attributes {
+                                    fullName
+                                    dob
+                                    job
+                                    company
+                                    knowledge
+                                    goal
+                                }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            `
+            const { data } = useAsyncQuery<UserData>(query);
+            console.log(data._rawValue.usersPermissionsUsers.data[0].attributes.enable2FA);
+        accountStorage.value = { email: identifier.value, password: password.value }; 
+        if (data._rawValue.usersPermissionsUsers.data[0].attributes.enable2FA === true) {
+            const code = getVerificationCode();
+            codeStorage.value = code;
+            const response = await fetch('http://localhost:1337/api/verification-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: identifier.value,
+                    code: code,
+                }),
+            });
+            router.push('/verification');
+        }
+        else {
+            await login({ identifier: identifier.value, password: password.value });
+            router.push('/lessons');
+        }
     } catch (e) {
         console.error('An error occurred:', e);
         showWrongCredentialsError.value = true;
@@ -81,6 +116,7 @@ const onSubmit = async () => {
         }, 3000);
     }
 };
+
 </script>
 
 <style scoped>
