@@ -54,6 +54,7 @@ const query = gql`
   }
 `
 const { data } = useAsyncQuery<AnnouncementsData>(query);
+console.log(data)
 </script>
 
 <style scoped></style>

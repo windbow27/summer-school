@@ -965,7 +965,7 @@ export interface ApiAnnouncementAnnouncement extends Schema.CollectionType {
     description: '';
   };
   options: {
-    draftAndPublish: false;
+    draftAndPublish: true;
   };
   attributes: {
     title: Attribute.String;
@@ -974,6 +974,7 @@ export interface ApiAnnouncementAnnouncement extends Schema.CollectionType {
     image: Attribute.Media<'images'> & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::announcement.announcement',
       'oneToOne',
@@ -1101,7 +1102,7 @@ export interface ApiLessonLesson extends Schema.CollectionType {
     description: '';
   };
   options: {
-    draftAndPublish: false;
+    draftAndPublish: true;
   };
   attributes: {
     title: Attribute.String;
@@ -1110,6 +1111,7 @@ export interface ApiLessonLesson extends Schema.CollectionType {
     image: Attribute.Media<'images'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::lesson.lesson',
       'oneToOne',

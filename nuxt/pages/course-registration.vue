@@ -1,12 +1,15 @@
 <template>
-    <div class="hero pages-wrapper"
+    <div v-if="!data">
+        Loading...
+    </div>
+    <div v-else class="hero pages-wrapper"
         style="background-image: url(https://preview.redd.it/y1jqr8m0fv531.jpg?width=2580&format=pjpg&auto=webp&s=2f377181d98a5629682394e29c687679a49bfef1);">
+
         <div class="hero-content flex-col lg:flex-row">
             <!--side panel-->
-            <div class="text-center w-full max-w-xl lg:text-left">
+            <div class="text-center w-full lg:text-left">
                 <h1 class="text-5xl font-bold">Course Registraion</h1>
-                <p class="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi
-                    exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+                <p class="py-6">Registration is available from <span class="text-info text-lg">{{ formatDate(data.availabilities.data[0].attributes.start) }}</span> to <span class="text-info text-lg">{{ formatDate(data.availabilities.data[0].attributes.end) }}</span>.</p>
             </div>
 
             <!--registration form-->
@@ -77,6 +80,9 @@
                     <div class="form-control mt-6">
                         <button class="btn btn-primary">Submit</button>
                     </div>
+                    <p class="text-error" :class="{ 'invisible': !showDateError }">
+                        Course registration is closed.
+                    </p>
 
                 </form>
             </div>
@@ -95,9 +101,44 @@ const knowledge = ref('');
 const goal = ref('');
 const router = useRouter();
 
+const showDateError = ref(false);
+
 const { mutate } = useMutation(createCourseRegistrationForm);
 
+const query = gql`
+query {
+  availabilities {
+    data {
+      id 
+        attributes {
+        start
+        end
+      }
+    }
+  }
+}
+`
+
+const { data } = useAsyncQuery<any>(query);
+
+const checkDate = () => {
+    if (!data) {
+        console.log("No data")
+        return false;
+    }
+    const start = new Date(data.value.availabilities.data[0].attributes.start)
+    const end = new Date(data.value.availabilities.data[0].attributes.end)
+    const now = new Date()
+    if (now < start || now > end) {
+        showDateError.value = true
+        return true;
+    }
+    return false;
+}
+
 const onSubmit = async () => {
+    if (checkDate())
+        return
     const data = {
         data: {
             fullName: fullName.value,
@@ -114,4 +155,8 @@ const onSubmit = async () => {
 
 </script>
 
-<style scoped></style>
+<style scoped>
+.text-error.invisible {
+    visibility: hidden;
+}
+</style>
