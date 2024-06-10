@@ -5,21 +5,35 @@
         Loading...
       </div>
       <div v-else-if="user">
-        <div class="text-sm breadcrumbs pb-8">
-        <ul>
-          <li><nuxt-link to="/lessons"><a>Lessons</a></nuxt-link></li>
-        </ul>
-      </div>
-        <div v-for="lesson in data.lessons.data" :key="lesson.id" class="card max-w-96 bg-gray-950 shadow-xl">
-          <figure>
-            <img :src="getStrapiMedia(lesson.attributes.image.data.attributes.url)"
-              :alt="lesson.attributes.image.data.attributes.alternativeText" />
-          </figure>
-          <div class="card-body">
-            <h2 class="card-title">{{ lesson.attributes.title }}</h2>
-            <p>Published at: {{ formatDate(lesson.attributes.publishedAt) }}</p>
-            <div class="card-actions justify-end">
-              <nuxt-link :to="`/lessons/${lesson.id}`" class="btn btn-primary">Read more</nuxt-link>
+        <div class="text-sm breadcrumbs">
+          <ul>
+            <li><nuxt-link to="/lessons"><a>Lessons</a></nuxt-link></li>
+          </ul>
+        </div>
+        <div>
+          <label for="knowledge-filter">Filter by knowledge:</label>
+          <select class="select" id="knowledge-filter" v-model="selectedKnowledge">
+            <option value="">All</option>
+            <option value="Novice">Novice</option>
+            <option value="Intermediate">Intermediate</option>
+            <option value="Advanced">Advanced</option>
+            <option value="Expert">Expert</option>
+          </select>
+        </div>
+        <div class="flex flex-wrap gap-8 justify-center p-8">
+          <div v-for="lesson in filteredLessons" :key="lesson.id"
+            class="card max-w-96 bg-gray-950 shadow-xl flex flex-col">
+            <figure>
+              <img class="h-56 w-full object-cover" :src="getStrapiMedia(lesson.attributes.image.data.attributes.url)"
+                :alt="lesson.attributes.image.data.attributes.alternativeText" />
+            </figure>
+            <div class="card-body">
+              <h2 class="card-title">{{ lesson.attributes.title }}</h2>
+              <p>Published at: {{ formatDate(lesson.attributes.publishedAt) }}</p>
+              <p>Grade: {{ lesson.attributes.knowledge }}</p>
+              <div class="card-actions justify-end">
+                <nuxt-link :to="`/lessons/${lesson.id}`" class="btn btn-primary">Read more</nuxt-link>
+              </div>
             </div>
           </div>
         </div>
@@ -43,6 +57,8 @@ import { getStrapiMedia, formatDate } from '~/utils/utils';
 
 const user = useStrapiUser();
 
+const selectedKnowledge = ref('');
+
 const query = gql`
     query {
       lessons {
@@ -52,6 +68,7 @@ const query = gql`
             title
             content
             publishedAt
+            knowledge
             image {
               data {
                 attributes {
@@ -66,6 +83,23 @@ const query = gql`
     }
   `
 const { data } = useAsyncQuery<LessonsData>(query);
+
+const sortedLessons = computed(() => {
+  if (data.value && data.value.lessons.data) {
+    return [...data.value.lessons.data].sort((a, b) => {
+      return new Date(b.attributes.publishedAt).getTime() - new Date(a.attributes.publishedAt).getTime();
+    });
+  }
+  return [];
+});
+
+const filteredLessons = computed(() => {
+  if (selectedKnowledge.value) {
+    return sortedLessons.value.filter(lesson => lesson.attributes.knowledge === selectedKnowledge.value);
+  }
+  return sortedLessons.value;
+});
+
 </script>
 
 <style scoped></style>

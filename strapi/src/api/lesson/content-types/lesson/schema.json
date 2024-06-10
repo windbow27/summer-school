@@ -15,18 +15,24 @@
     "title": {
       "type": "string"
     },
-    "content": {
-      "type": "text"
-    },
-    "timestamp": {
-      "type": "datetime"
-    },
     "image": {
       "type": "media",
       "multiple": false,
       "required": false,
       "allowedTypes": [
         "images"
+      ]
+    },
+    "content": {
+      "type": "blocks"
+    },
+    "knowledge": {
+      "type": "enumeration",
+      "enum": [
+        "Novice",
+        "Intermediate",
+        "Advanced",
+        "Expert"
       ]
     }
   }

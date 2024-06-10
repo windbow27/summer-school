@@ -4,6 +4,7 @@ interface Lesson {
       title: string;
       content: string;
       publishedAt: string;
+      knowledge: string;
       image: {
         data: {
           attributes: {

@@ -13,15 +13,21 @@
       <div class="shadow overflow-hidden sm:rounded-lg p-6 ">
         <div class="flex items-center justify-between">
           <h2 class="text-2xl font-bold text-white">{{ data.announcement.data.attributes.title }}</h2>
+          {{ console.log(data.announcement.data.attributes.publishedAt) }}
           <span class="text-sm">{{ formatDate(data.announcement.data.attributes.publishedAt || '') }}</span>
         </div>
-        <div class="mt-4">
+        <div class="lg:mx-8 mt-8">
           <img :src="getStrapiMedia(data.announcement.data.attributes.image.data.attributes.url || '')"
             :alt="data.announcement.data.attributes.image.data.attributes.alternativeText || ''"
-            class="w-full h-64 object-cover rounded" />
+            class="w-full object-cover rounded" />
         </div>
-        <div class="mt-6 text-white">
-          <p>{{ data.announcement.data.attributes.content }}</p>
+        <div class="lg:mx-16 mt-8 text-white text-lg">
+          <div v-for="(paragraph, index) in data.announcement.data.attributes.content" :key="index">
+            <p v-for="(child, childIndex) in paragraph.children" :key="`child-${childIndex}`">
+              <span :class="{ 'font-bold text-info': child.bold }">{{ child.text }}</span>
+            </p>
+            <br>
+          </div>
         </div>
       </div>
     </div>
@@ -40,4 +46,8 @@ const { data } = useAsyncQuery<{ announcement: { data: { attributes: any } } }>(
 
 </script>
 
-<style scoped></style>
+<style scoped>
+.text-sm.breadcrumbs::-webkit-scrollbar {
+  display: none;
+}
+</style>

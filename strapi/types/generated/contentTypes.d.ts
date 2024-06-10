@@ -969,9 +969,8 @@ export interface ApiAnnouncementAnnouncement extends Schema.CollectionType {
   };
   attributes: {
     title: Attribute.String;
-    content: Attribute.Text;
-    timestamp: Attribute.DateTime;
     image: Attribute.Media<'images'> & Attribute.Required;
+    content: Attribute.Blocks;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1106,9 +1105,11 @@ export interface ApiLessonLesson extends Schema.CollectionType {
   };
   attributes: {
     title: Attribute.String;
-    content: Attribute.Text;
-    timestamp: Attribute.DateTime;
     image: Attribute.Media<'images'>;
+    content: Attribute.Blocks;
+    knowledge: Attribute.Enumeration<
+      ['Novice', 'Intermediate', 'Advanced', 'Expert']
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
