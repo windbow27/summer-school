@@ -4,10 +4,11 @@
   "info": {
     "singularName": "email",
     "pluralName": "emails",
-    "displayName": "Email"
+    "displayName": "Email",
+    "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
