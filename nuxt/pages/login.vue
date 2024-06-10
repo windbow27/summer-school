@@ -87,9 +87,8 @@ const onSubmit = async () => {
             }
             `
             const { data } = useAsyncQuery<UserData>(query);
-            console.log(data._rawValue.usersPermissionsUsers.data[0].attributes.enable2FA);
         accountStorage.value = { email: identifier.value, password: password.value }; 
-        if (data._rawValue.usersPermissionsUsers.data[0].attributes.enable2FA === true) {
+        if (data.value?.usersPermissionsUsers.attributes.enable2FA === true) {
             const code = getVerificationCode();
             codeStorage.value = code;
             const response = await fetch('http://localhost:1337/api/verification-email', {

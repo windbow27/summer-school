@@ -9,7 +9,7 @@
                     exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
             </div>
 
-            <!--login form-->
+            <!--registration form-->
             <div class="card shrink-0 w-full max-w-lg shadow-2xl bg-gray-950">
                 <form class="card-body" @submit.prevent="onSubmit()">
                     <!--full name-->
@@ -93,6 +93,7 @@ const job = ref('');
 const company = ref('');
 const knowledge = ref('');
 const goal = ref('');
+const router = useRouter();
 
 const { mutate } = useMutation(createCourseRegistrationForm);
 
@@ -108,6 +109,7 @@ const onSubmit = async () => {
         }
     }
     mutate(data)
+    router.push("/lessons")
 }
 
 </script>

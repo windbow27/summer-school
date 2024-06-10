@@ -73,7 +73,7 @@ const onSubmit = async () => {
             }),
         });
 
-        router.push('/login')
+        router.push('/course-registration')
     } catch (e) { 
         console.error('An error occurred:', e)
     }

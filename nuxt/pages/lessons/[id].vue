@@ -4,6 +4,12 @@
         Loading...
       </div>
       <div v-else>
+        <div class="text-sm breadcrumbs">
+        <ul>
+          <li><nuxt-link to="/lessons"><a>Lessons</a></nuxt-link></li>
+          <li><a>{{ data.lesson.data.attributes.title }}</a></li>
+        </ul>
+      </div>
         <div class="shadow overflow-hidden sm:rounded-lg p-6 ">
           <div class="flex items-center justify-between">
             <h2 class="text-2xl font-bold text-white">{{ data.lesson.data.attributes.title }}</h2>
