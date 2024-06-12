@@ -60,53 +60,20 @@ const showWrongCredentialsError = ref(false);
 
 const onSubmit = async () => {
     try {
-        const query = gql`
-            query {
-                usersPermissionsUsers(filters: {email: {eq: "${identifier.value}"}}) {
-                    data {
-                        id
-                        attributes {
-                        username
-                        email
-                        enable2FA
-                        course_registration {
-                            data {
-                                attributes {
-                                    fullName
-                                    dob
-                                    job
-                                    company
-                                    knowledge
-                                    goal
-                                }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            `
-            const { data } = useAsyncQuery<UserData>(query);
-        accountStorage.value = { email: identifier.value, password: password.value }; 
-        if (data.value?.usersPermissionsUsers.attributes.enable2FA === true) {
-            const code = getVerificationCode();
-            codeStorage.value = code;
-            const response = await fetch('http://localhost:1337/api/verification-email', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    email: identifier.value,
-                    code: code,
-                }),
-            });
-            router.push('/verification');
-        }
-        else {
-            await login({ identifier: identifier.value, password: password.value });
-            router.push('/lessons');
-        }
+        const code = getVerificationCode();
+        codeStorage.value = code;
+        const response = await fetch('http://localhost:1337/api/verification-email', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: identifier.value,
+                code: code,
+            }),
+        });
+        await login({ identifier: identifier.value, password: password.value })
+        router.push('/verification');
     } catch (e) {
         console.error('An error occurred:', e);
         showWrongCredentialsError.value = true;
